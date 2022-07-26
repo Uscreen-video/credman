@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_credentials_manager (0.0.1.pre.alpha)
+    rails_credentials_manager (0.0.1.pre.alpha2)
       activesupport (>= 6.0)
       dry-cli (~> 0.7)
       hash_diff (~> 1.0)
