@@ -1,4 +1,4 @@
-module EaRailsCredentialsManagerrl
+module RailsCredentialsManager
   class Set < RailsCredentialsManager::Base
     def perform(key, new_value)
       key_with_path = key.split(".").map(&:to_sym)
