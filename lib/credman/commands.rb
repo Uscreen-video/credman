@@ -49,7 +49,7 @@ module Credman
       end
 
       class Delete < Dry::CLI::Command
-        desc "Delete a key for given environments"
+        desc "Delete keys for given environments"
 
         argument :keys, type: :array, required: true, desc: "keys to delete"
 
