@@ -10,6 +10,7 @@ require_relative "credman/commands"
 require_relative "credman/get"
 require_relative "credman/list"
 require_relative "credman/set"
+require_relative "credman/delete"
 require_relative "credman/diff"
 require_relative "credman/conflicts"
 require_relative "credman/version"
@@ -22,6 +23,7 @@ module Credman
       register "get", Get
       register "list", List
       register "set", Set
+      register "delete", Delete
       register "diff", Diff
       register "conflicts", Conflicts
     end

@@ -48,6 +48,22 @@ module Credman
         end
       end
 
+      class Delete < Dry::CLI::Command
+        desc "Delete a key for given environments"
+
+        argument :keys, type: :array, required: true, desc: "keys to delete"
+
+        option :environments,
+          aliases: ["e"],
+          type: :array,
+          default: [],
+          desc: "filter for environments"
+
+        def call(keys:, environments:, **)
+          Credman::Delete.new(environments).perform(keys)
+        end
+      end
+
       class Diff < Dry::CLI::Command
         desc "Show credentials diff between given branch (heroku by default) and current changes"
 

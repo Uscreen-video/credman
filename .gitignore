@@ -6,6 +6,7 @@
 /pkg/
 /spec/reports/
 /tmp/
+/config/credentials/
 
 .rspec_status
 
