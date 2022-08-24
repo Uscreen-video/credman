@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe RailsCredentialsManager::Get do
+RSpec.describe Credman::Get do
   describe "#perform" do
     subject(:perform) { described_class.new(envs).perform(keys) }
 

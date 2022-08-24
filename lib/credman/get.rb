@@ -1,5 +1,5 @@
-module RailsCredentialsManager
-  class Get < RailsCredentialsManager::Base
+module Credman
+  class Get < Credman::Base
     def perform(keys)
       abort pastel.red("At least one key required") if keys.empty?
 

@@ -1,4 +1,4 @@
-module RailsCredentialsManager
+module Credman
   class Base
     AVAILABLE_ENVIRONMENTS = %i[development test staging production].freeze
 

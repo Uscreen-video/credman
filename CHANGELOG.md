@@ -1,4 +1,5 @@
-## [Unreleased]
+## [0.0.2-alpha] - 2022-08-24
+- Rename gem to `credman`
 
 ## [0.0.1-alpha3] - 2022-07-27
 

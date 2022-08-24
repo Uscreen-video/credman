@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require File.expand_path("../lib/credman", __dir__)
+
+Dry::CLI.new(Credman::CLI::Commands).call

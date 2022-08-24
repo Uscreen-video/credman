@@ -1,7 +1,7 @@
 require "active_support/encrypted_file"
 
-module RailsCredentialsManager
-  class Conflicts < RailsCredentialsManager::Base
+module Credman
+  class Conflicts < Credman::Base
     REGEXP = /^<{7} HEAD(\r?\n(?!={7}\r?\n).*)*\r?\n={7}(\r?\n(?!>{7} ).*)*\r?\n>{7} \S+/m
 
     def perform

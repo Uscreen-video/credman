@@ -1,5 +1,5 @@
-module RailsCredentialsManager
-  class Set < RailsCredentialsManager::Base
+module Credman
+  class Set < Credman::Base
     def perform(key, new_value)
       key_with_path = key.split(".").map(&:to_sym)
       new_value = normalize_new_value(new_value)

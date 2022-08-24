@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in rails_credentials_manager.gemspec
+# Specify your gem's dependencies in credman.gemspec
 gemspec
 
 gem "rake", "~> 13.0"

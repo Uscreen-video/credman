@@ -1,4 +1,4 @@
-module RailsCredentialsManager
+module Credman
   module CLI
     module Commands
       class Get < Dry::CLI::Command
@@ -9,11 +9,11 @@ module RailsCredentialsManager
         option :environments,
           aliases: ["e"],
           type: :array,
-          default: RailsCredentialsManager::Base::AVAILABLE_ENVIRONMENTS,
+          default: Credman::Base::AVAILABLE_ENVIRONMENTS,
           desc: "filter for environments"
 
         def call(keys:, environments:, **)
-          RailsCredentialsManager::Get.new(environments).perform(keys)
+          Credman::Get.new(environments).perform(keys)
         end
       end
 
@@ -23,11 +23,11 @@ module RailsCredentialsManager
         option :environments,
           aliases: ["e"],
           type: :array,
-          default: RailsCredentialsManager::Base::AVAILABLE_ENVIRONMENTS,
+          default: Credman::Base::AVAILABLE_ENVIRONMENTS,
           desc: "filter for environments"
 
         def call(environments:, **)
-          RailsCredentialsManager::List.new(environments).perform
+          Credman::List.new(environments).perform
         end
       end
 
@@ -44,7 +44,7 @@ module RailsCredentialsManager
           desc: "filter for environments"
 
         def call(key:, value:, environments:, **)
-          RailsCredentialsManager::Set.new(environments).perform(key, value)
+          Credman::Set.new(environments).perform(key, value)
         end
       end
 
@@ -56,11 +56,11 @@ module RailsCredentialsManager
         option :environments,
           aliases: ["e"],
           type: :array,
-          default: RailsCredentialsManager::Base::AVAILABLE_ENVIRONMENTS,
+          default: Credman::Base::AVAILABLE_ENVIRONMENTS,
           desc: "filter for environments"
 
         def call(branch:, environments:, **)
-          RailsCredentialsManager::Diff.new(environments).perform(branch)
+          Credman::Diff.new(environments).perform(branch)
         end
       end
 
@@ -70,11 +70,11 @@ module RailsCredentialsManager
         option :environments,
           aliases: ["e"],
           type: :array,
-          default: RailsCredentialsManager::Base::AVAILABLE_ENVIRONMENTS,
+          default: Credman::Base::AVAILABLE_ENVIRONMENTS,
           desc: "filter for environments"
 
         def call(environments:, **)
-          RailsCredentialsManager::Conflicts.new(environments).perform
+          Credman::Conflicts.new(environments).perform
         end
       end
     end

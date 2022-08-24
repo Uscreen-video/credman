@@ -1,7 +1,7 @@
 require "tty-command"
 
-module RailsCredentialsManager
-  class Diff < RailsCredentialsManager::Base
+module Credman
+  class Diff < Credman::Base
     def perform(branch_to_compare)
       cmd = TTY::Command.new(pty: true, printer: :null)
 

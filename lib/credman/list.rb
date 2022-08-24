@@ -1,5 +1,5 @@
-module RailsCredentialsManager
-  class List < RailsCredentialsManager::Base
+module Credman
+  class List < Credman::Base
     def perform
       configs.each do |env, config|
         puts pastel.green("#{env}:")
