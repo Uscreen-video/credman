@@ -1,28 +1,85 @@
-# Rails::Credentials::Manager
+# Credman
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rails/credentials/manager`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Handy console command for developers to manage Rails credentials.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'credman'
+group :development do
+  gem 'credman'
+end
 ```
-
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install credman
 
 ## Usage
 
-TODO: Write usage instructions here
+List of all commands:
+
+### credman help
+```
+bundle exec credman
+or
+bundle exec credman help
+or
+bundle exec credman usage
+```
+
+Details of any command:
+
+```
+bundle exec credman set -h
+```
+
+### credman list
+List all your keys for all environments.
+
+```
+bundle exec credman list
+```
+
+### credman get
+Getting a particular key's values.
+
+```
+bundle exec credman get google.maps.api_key github.private_key
+```
+
+### credman set
+
+Add/change a value for a particular key. `-e` attribute is mandatory for this command.
+
+
+```
+bundle exec credman set new_service.super_key new_secret_value -e development,test,staging,production
+```
+
+### credman delete
+
+Delete for keys. `-e` attribute is mandatory for this command.
+
+```
+bundle exec credman delete new_service.super_key new_service.another_key -e development,test,staging,production
+```
+
+### credman diff
+
+Shows all keys changed compared with `heroku` branch by default. You can specify any branch from origin you want to. For example `bin/earl diff my_branch`
+
+```
+> bundle exec credman diff
+development:
+	new_service.super_key:	 ADDED: "new_secret_value"
+test:
+	new_service.super_key:	 ADDED: "new_secret_value"
+staging:
+	new_service.super_key:	 ADDED: "new_secret_value"
+production:
+	new_service.super_key:	 ADDED: "new_secret_value"
+```
+
+### credman conflicts
+Run it if you have merge conflicts in `configs/credentials/*.yml.enc`. That interactive tool will help you resolve the conflict.
 
 ## Development
 
