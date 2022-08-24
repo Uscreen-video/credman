@@ -1,6 +1,7 @@
-## [0.0.3-alpha] - 2022-08-24
+## [0.0.3] - 2022-08-24
 
 - add `bin/rspec` binstubs
+- introduce `delete` command
 
 ## [0.0.2-alpha] - 2022-08-24
 - Rename gem to `credman`
