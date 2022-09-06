@@ -1,3 +1,7 @@
+## [0.0.4] - 2022-09-06
+
+- fix: list command failure when root key exists (PR #2)
+
 ## [0.0.3] - 2022-08-24
 
 - add `bin/rspec` binstubs
