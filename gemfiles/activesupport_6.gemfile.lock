@@ -83,6 +83,8 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   activesupport (~> 6.0.0)
