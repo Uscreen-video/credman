@@ -1,3 +1,8 @@
+## [0.0.5.pre] - 2022-09-06
+
+- Setup Github actions (PR #6)
+- small fixes related to linters and specs (PR #6)
+
 ## [0.0.4] - 2022-09-06
 
 - fix: list command failure when root key exists (PR #2)
