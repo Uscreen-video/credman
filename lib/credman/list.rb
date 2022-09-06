@@ -5,7 +5,14 @@ module Credman
         puts pastel.green("#{env}:")
 
         config.each do |key, value|
-          deep_print_key_and_value(value, [key])
+          if value.is_a?(Hash)
+            key_path = [key]
+          else
+            value = {key => value}
+            key_path = []
+          end
+
+          deep_print_key_and_value(value, key_path)
         end
       end
     end
