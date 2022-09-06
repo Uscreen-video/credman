@@ -43,9 +43,7 @@ module Credman
     end
 
     def deserialize(raw_config)
-      # rubocop:disable Security/YAMLLoad
-      YAML.respond_to?(:unsafe_load) ? YAML.unsafe_load(raw_config) : YAML.load(raw_config)
-      # rubocop:enable Security/YAMLLoad
+      YAML.respond_to?(:unsafe_load) ? YAML.unsafe_load(raw_config) : YAML.safe_load(raw_config)
     end
 
     def deep_print_diff(diff, key_path = [])

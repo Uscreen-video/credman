@@ -1,5 +1,17 @@
+GIT
+  remote: https://github.com/rails/rails.git
+  revision: 9a439f633205af0800f34af32f2122150faa2767
+  branch: main
+  specs:
+    activesupport (7.1.0.alpha)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      connection_pool (>= 2.2.5)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+
 PATH
-  remote: .
+  remote: ..
   specs:
     credman (0.0.4)
       activesupport (>= 6.0)
@@ -11,26 +23,22 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (7.0.3.1)
-      concurrent-ruby (~> 1.0, >= 1.0.2)
-      i18n (>= 1.6, < 2)
-      minitest (>= 5.1)
-      tzinfo (~> 2.0)
     appraisal (2.4.1)
       bundler
       rake
       thor (>= 0.14.0)
     ast (2.4.2)
     concurrent-ruby (1.1.10)
+    connection_pool (2.2.5)
     diff-lcs (1.5.0)
     dry-cli (0.7.0)
-    hash_diff (1.1.0)
+    hash_diff (1.1.1)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     json (2.6.2)
     minitest (5.16.3)
     parallel (1.22.1)
-    parser (3.1.2.0)
+    parser (3.1.2.1)
       ast (~> 2.4.1)
     pastel (0.8.0)
       tty-color (~> 0.5)
@@ -51,24 +59,24 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
     rspec-support (3.11.0)
-    rubocop (1.31.2)
+    rubocop (1.35.1)
       json (~> 2.3)
       parallel (~> 1.10)
-      parser (>= 3.1.0.0)
+      parser (>= 3.1.2.1)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.18.0, < 2.0)
+      rubocop-ast (>= 1.20.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.19.1)
+    rubocop-ast (1.21.0)
       parser (>= 3.1.1.0)
     rubocop-performance (1.14.3)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.11.0)
-    standard (1.13.0)
-      rubocop (= 1.31.2)
+    standard (1.16.1)
+      rubocop (= 1.35.1)
       rubocop-performance (= 1.14.3)
     thor (1.2.1)
     tty-color (0.6.0)
@@ -84,6 +92,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activesupport!
   appraisal
   credman!
   rake (~> 13.0)

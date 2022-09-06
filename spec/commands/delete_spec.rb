@@ -44,7 +44,7 @@ RSpec.describe Credman::Delete do
 
       before do
         allow_any_instance_of(described_class).to receive(:configs).and_return(configs)
-        allow_any_instance_of(ActiveSupport::EncryptedConfiguration).to receive_message_chain(:new, :write).and_return(true)
+        allow_any_instance_of(ActiveSupport::EncryptedConfiguration).to receive(:write).and_return(true)
       end
 
       context "with non-existing key" do

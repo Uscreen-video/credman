@@ -1,11 +1,12 @@
 name: Ruby
 
 on:
+  pull_request:
+    branches:
+      - '*'
   push:
     branches:
-      - master
-
-  pull_request:
+      - main
 
 jobs:
   build:
@@ -14,14 +15,30 @@ jobs:
     strategy:
       matrix:
         ruby:
-          - 2.7.4
+          - 2.7
+          - 3.0
+          - 3.1
+        gemfile:
+          - activesupport_6
+          - activesupport_6_1
+          - activesupport_7
+          - activesupport_master
+
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.gemfile }}.gemfile
+      BUNDLE_PATH_RELATIVE_TO_CWD: true
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
-    - name: Run the default task
-      run: bundle exec rake
+
+    - name: StandardRb check
+      run: bundle exec standardrb
+
+    - name: Run RSpec
+      run: bundle exec rspec
