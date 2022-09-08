@@ -1,0 +1,5 @@
+default_diff_branch: main
+available_environments:
+  - development
+  - test
+  - production
