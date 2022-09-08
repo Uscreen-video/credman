@@ -1,5 +1,6 @@
-## [0.0.5.pre] - 2022-09-06
+## [0.0.5] - 2022-09-06
 
+- Introduce config with `default_diff_branch` and `available_environments` options (PR #9)
 - Setup Github actions (PR #6)
 - small fixes related to linters and specs (PR #6)
 
