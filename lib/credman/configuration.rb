@@ -21,6 +21,8 @@ module Credman
     end
 
     def load_from_yml(config_path = "config/credman.yml")
+      return unless File.exist?(config_path)
+
       settings = YAML.load_file(config_path)
       return unless settings
 
