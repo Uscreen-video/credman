@@ -9,7 +9,7 @@ module Credman
         option :environments,
           aliases: ["e"],
           type: :array,
-          default: Credman::Base::AVAILABLE_ENVIRONMENTS,
+          default: Credman.config.available_environments,
           desc: "filter for environments"
 
         def call(keys:, environments:, **)
@@ -23,7 +23,7 @@ module Credman
         option :environments,
           aliases: ["e"],
           type: :array,
-          default: Credman::Base::AVAILABLE_ENVIRONMENTS,
+          default: Credman.config.available_environments,
           desc: "filter for environments"
 
         def call(environments:, **)
@@ -67,12 +67,12 @@ module Credman
       class Diff < Dry::CLI::Command
         desc "Show credentials diff between given branch (heroku by default) and current changes"
 
-        argument :branch, type: :string, default: "heroku", required: false
+        argument :branch, type: :string, default: Credman.config.default_diff_branch, required: false
 
         option :environments,
           aliases: ["e"],
           type: :array,
-          default: Credman::Base::AVAILABLE_ENVIRONMENTS,
+          default: Credman.config.available_environments,
           desc: "filter for environments"
 
         def call(branch:, environments:, **)
@@ -86,7 +86,7 @@ module Credman
         option :environments,
           aliases: ["e"],
           type: :array,
-          default: Credman::Base::AVAILABLE_ENVIRONMENTS,
+          default: Credman.config.available_environments,
           desc: "filter for environments"
 
         def call(environments:, **)

@@ -1,9 +1,7 @@
 module Credman
   class Base
-    AVAILABLE_ENVIRONMENTS = %i[development test staging production].freeze
-
     def initialize(environment_list)
-      @environment_list = environment_list.map(&:to_sym).keep_if { |env| env.to_sym.in?(AVAILABLE_ENVIRONMENTS) }
+      @environment_list = environment_list.keep_if { |env| env.in?(Credman.config.available_environments) }
       abort pastel.red("No valid environments specified. Valid example: `-e development,test`") if @environment_list.empty?
     end
 

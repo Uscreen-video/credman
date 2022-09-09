@@ -5,6 +5,15 @@ require "dry/cli"
 require "pastel"
 require "hash_diff"
 
+require_relative "credman/configuration"
+module Credman
+  def self.configuration
+    Credman::Configuration.instance
+  end
+  singleton_class.send(:alias_method, :config, :configuration)
+end
+Credman.configuration.load_from_yml
+
 require_relative "credman/base"
 require_relative "credman/commands"
 require_relative "credman/get"
