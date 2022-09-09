@@ -4,19 +4,21 @@ module Credman
   class Configuration
     include Singleton
 
-    @@settings_list = []
+    attr_writer :settings_list
 
     def self.add_setting(name, default_value = nil)
       attr_accessor name
       instance.send("#{name}=", default_value)
-      @@settings_list.push(name.to_sym)
+      instance.settings_list = instance.settings_list.push(name.to_sym)
+    end
+
     def self.reset
       load __FILE__
       self
     end
 
     def settings_list
-      @@settings_list
+      @settings_list ||= []
     end
 
     def setting_exists?(setting_name)
