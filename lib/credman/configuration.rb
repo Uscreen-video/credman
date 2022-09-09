@@ -10,6 +10,9 @@ module Credman
       attr_accessor name
       instance.send("#{name}=", default_value)
       @@settings_list.push(name.to_sym)
+    def self.reset
+      load __FILE__
+      self
     end
 
     def settings_list

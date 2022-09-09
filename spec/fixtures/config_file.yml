@@ -1,0 +1,4 @@
+default_diff_branch: test
+available_environments:
+  - test
+unknown_setting: value
