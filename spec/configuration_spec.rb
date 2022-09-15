@@ -61,10 +61,6 @@ RSpec.describe Credman::Configuration do
         expect(config.available_environments).to match_array %w[test]
         expect { config.unknown_setting }.to raise_error(NoMethodError)
       end
-
-      it "" do
-        p config.default_diff_branch
-      end
     end
   end
 end

@@ -105,14 +105,5 @@ module Credman
         deep_set!(obj[key], keys.slice(1..-1), value)
       end
     end
-
-    def rewrite_config_for(environment, new_config)
-      ActiveSupport::EncryptedFile.new(
-        content_path: "config/credentials/#{environment}.yml.enc",
-        key_path: "config/credentials/#{environment}.key",
-        env_key: "RAILS_MASTER_KEY",
-        raise_if_missing_key: true
-      ).write(new_config)
-    end
   end
 end
