@@ -25,9 +25,7 @@ module Credman
         if update_config
           updated_config = config.dup
           deep_set!(updated_config, key_with_path, new_value)
-          # removes "---\n" in the very beginning
-          config_as_string = updated_config.deep_stringify_keys.to_yaml[4..]
-          rewrite_config_for(env, config_as_string)
+          rewrite_config_for(env, updated_config)
         end
       end
     end

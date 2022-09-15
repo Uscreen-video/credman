@@ -20,9 +20,7 @@ module Credman
         @merged_config = our_config.deep_merge(their_config)
         deep_print_diff(HashDiff.diff(their_config, our_config))
 
-        # removes "---\n" in the very beginning
-        merged_config_as_string = @merged_config.deep_stringify_keys.to_yaml[4..]
-        rewrite_config_for(env, merged_config_as_string)
+        rewrite_config_for(env, @merged_config)
         puts "✅ Merged config for #{env} has been saved"
       end
     end

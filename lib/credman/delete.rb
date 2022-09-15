@@ -20,11 +20,7 @@ module Credman
           end
         end
 
-        if is_updated
-          # removes "---\n" in the very beginning
-          config_as_string = updated_config.deep_stringify_keys.to_yaml[4..]
-          rewrite_config_for(env, config_as_string)
-        end
+        rewrite_config_for(env, updated_config) if is_updated
       end
     end
 
