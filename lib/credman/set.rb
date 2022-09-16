@@ -3,6 +3,7 @@ module Credman
     def perform(key, new_value)
       key_with_path = key.split(".").map(&:to_sym)
       new_value = normalize_new_value(new_value)
+      abort pastel.red("Invalid key") if key.blank?
 
       configs.each do |env, config|
         puts pastel.green("#{env}:")
