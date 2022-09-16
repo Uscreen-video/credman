@@ -1,4 +1,4 @@
-default_diff_branch: main
+default_diff_branch: origin/main
 available_environments:
   - development
   - test
