@@ -31,7 +31,7 @@ RSpec.describe Credman::Diff do
         it "prints values for every environments" do
           regexp = [
             "development:", "Can not find development credentials file in non-existing-branch branch",
-            "test:", "Can not find test credentials file in non-existing-branch branch",
+            "test:", "Can not find test credentials file in non-existing-branch branch"
           ].join(".+")
 
           expect { perform }.to output(/#{regexp}/m).to_stdout
