@@ -32,7 +32,7 @@ module Credman
     end
 
     def key_for(environment)
-      Pathname.new("config/credentials/#{environment}.key").binread.strip
+      ENV["RAILS_MASTER_KEY"] || Pathname.new("config/credentials/#{environment}.key").binread.strip
     end
 
     def decript(key, content)
