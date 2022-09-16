@@ -42,6 +42,15 @@ module Credman
       encrypted_configuration(environment).write(config_as_string)
     end
 
+    def key_for(environment)
+      ENV["RAILS_MASTER_KEY"] || Pathname.new("config/credentials/#{environment}.key").binread.strip
+    end
+
+    def decript(key, content)
+      ActiveSupport::MessageEncryptor.new([key].pack("H*"), cipher: "aes-128-gcm")
+        .decrypt_and_verify(content)
+    end
+
     private
 
     def config_for(environment)

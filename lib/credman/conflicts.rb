@@ -31,15 +31,6 @@ module Credman
       deserialize(decript(key_for(environment), encripted_file_content)).deep_symbolize_keys
     end
 
-    def key_for(environment)
-      ENV["RAILS_MASTER_KEY"] || Pathname.new("config/credentials/#{environment}.key").binread.strip
-    end
-
-    def decript(key, content)
-      ActiveSupport::MessageEncryptor.new([key].pack("H*"), cipher: "aes-128-gcm")
-        .decrypt_and_verify(content)
-    end
-
     def deserialize(raw_config)
       YAML.respond_to?(:unsafe_load) ? YAML.unsafe_load(raw_config) : YAML.safe_load(raw_config)
     end
