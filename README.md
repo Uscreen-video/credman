@@ -29,13 +29,13 @@ Handy console tool for developers to manage Rails credentials.
 
 ## Motivation
 
-Rails credentials is a nice tool to store encrypted credentials directly in your repo. Starts from rails 6.0 it brings multi environment credentials feature that allow us to split credentials into separate files.
+Rails credentials is a nice tool to store encrypted credentials directly in your repo. Starting with Rails 6.0 it brings multi environment credentials feature that allows us to split credentials into separate files.
 
 But it also brought a lot of pain for developers:
-- each enviroment credentials file must have a complete list of all keys. It's easy to forget to add a key into one of the environments (see [set](#credman-set) and [delete](#credman-delete) command)
-- You have to add/edit keys manually open each environment file. It's ok for one file but not for 3 or more. It also can brings errors you might miss until deploy to production. (see [set](#credman-set) and [delete](#credman-delete) command)
-- merge conflicts in creds files become a hell since files are encrypted (see [conflicts](#credman-conflicts) command)
-- you can't easily to see what keys was added/changed/deleted in the current branch (see [diff](#credman-diff) command)
+- Each enviroment credentials file must have a complete list of all keys. It's easy to forget to add a key into one of the environments (see [set](#credman-set) and [delete](#credman-delete) command)
+- You have to manually open each environment file. It's ok for one file but not for 3 or more. It also brings mistakes you might miss until deploy to production. (see [set](#credman-set) and [delete](#credman-delete) command)
+- Merge conflicts become a hell since files are encrypted (see [conflicts](#credman-conflicts) command)
+- You can't easily see what keys were added/changed/deleted in the current branch (see [diff](#credman-diff) command)
 
 This gem is designed to solve all these problems and make life easier for developers who use multi environment credentials.
 
