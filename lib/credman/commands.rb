@@ -93,6 +93,14 @@ module Credman
           Credman::Conflicts.new(environments).perform
         end
       end
+
+      class Version < Dry::CLI::Command
+        desc "Print current version"
+
+        def call(*)
+          puts Credman::VERSION
+        end
+      end
     end
   end
 end

@@ -35,6 +35,7 @@ module Credman
       register "delete", Delete
       register "diff", Diff
       register "conflicts", Conflicts
+      register "version", Version, aliases: ["v", "-v", "--version"]
     end
   end
 end
