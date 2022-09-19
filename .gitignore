@@ -6,8 +6,9 @@
 /pkg/
 /spec/reports/
 /tmp/
-/config/credentials/
 
 .rspec_status
+config/credentians/*.yml.enc
+config/credentians/*.key
 
 *.code-workspace

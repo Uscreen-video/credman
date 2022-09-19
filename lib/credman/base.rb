@@ -35,15 +35,35 @@ module Credman
       config.dig(*dig_keys)&.key?(keys_path.last)
     end
 
+    def rewrite_config_for(environment, new_config)
+      # removes "---\n" in the very beginning
+      config_as_string = new_config.deep_stringify_keys.to_yaml[4..]
+
+      encrypted_configuration(environment).write(config_as_string)
+    end
+
+    def key_for(environment)
+      ENV["RAILS_MASTER_KEY"] || Pathname.new("config/credentials/#{environment}.key").binread.strip
+    end
+
+    def decript(key, content)
+      ActiveSupport::MessageEncryptor.new([key].pack("H*"), cipher: "aes-128-gcm")
+        .decrypt_and_verify(content)
+    end
+
     private
 
     def config_for(environment)
+      encrypted_configuration(environment).config
+    end
+
+    def encrypted_configuration(environment)
       ActiveSupport::EncryptedConfiguration.new(
         config_path: "config/credentials/#{environment}.yml.enc",
         key_path: "config/credentials/#{environment}.key",
         env_key: "RAILS_MASTER_KEY",
         raise_if_missing_key: true
-      ).config
+      )
     end
   end
 end

@@ -8,11 +8,11 @@ module Credman
       configs.each do |env, config|
         puts pastel.green("#{env}:")
 
-        result = cmd.run!("echo `git show origin/#{branch_to_compare}:config/credentials/#{env}.yml.enc`")
+        result = cmd.run!("echo `git show #{branch_to_compare}:config/credentials/#{env}.yml.enc`")
         encripted_file_content = result.out.strip
 
         if encripted_file_content.blank?
-          puts "❗️ Can not find #{env} credentials file in origin/#{branch_to_compare} branch"
+          puts "❗️ Can not find #{env} credentials file in #{branch_to_compare} branch"
           next
         end
         branch_config = config_to_compare_for(env, encripted_file_content)
@@ -25,15 +25,6 @@ module Credman
 
     def config_to_compare_for(environment, encripted_file_content)
       deserialize(decript(key_for(environment), encripted_file_content)).deep_symbolize_keys
-    end
-
-    def key_for(environment)
-      Pathname.new("config/credentials/#{environment}.key").binread.strip
-    end
-
-    def decript(key, content)
-      ActiveSupport::MessageEncryptor.new([key].pack("H*"), cipher: "aes-128-gcm")
-        .decrypt_and_verify(content)
     end
 
     def deserialize(raw_config)

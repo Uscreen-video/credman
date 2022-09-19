@@ -20,9 +20,7 @@ module Credman
         @merged_config = our_config.deep_merge(their_config)
         deep_print_diff(HashDiff.diff(their_config, our_config))
 
-        # removes "---\n" in the very beginning
-        merged_config_as_string = @merged_config.deep_stringify_keys.to_yaml[4..]
-        rewrite_config_for(env, merged_config_as_string)
+        rewrite_config_for(env, @merged_config)
         puts "✅ Merged config for #{env} has been saved"
       end
     end
@@ -31,15 +29,6 @@ module Credman
 
     def config_to_compare_for(environment, encripted_file_content)
       deserialize(decript(key_for(environment), encripted_file_content)).deep_symbolize_keys
-    end
-
-    def key_for(environment)
-      Pathname.new("config/credentials/#{environment}.key").binread.strip
-    end
-
-    def decript(key, content)
-      ActiveSupport::MessageEncryptor.new([key].pack("H*"), cipher: "aes-128-gcm")
-        .decrypt_and_verify(content)
     end
 
     def deserialize(raw_config)
@@ -104,15 +93,6 @@ module Credman
         obj[key] = {} unless obj[key]
         deep_set!(obj[key], keys.slice(1..-1), value)
       end
-    end
-
-    def rewrite_config_for(environment, new_config)
-      ActiveSupport::EncryptedFile.new(
-        content_path: "config/credentials/#{environment}.yml.enc",
-        key_path: "config/credentials/#{environment}.key",
-        env_key: "RAILS_MASTER_KEY",
-        raise_if_missing_key: true
-      ).write(new_config)
     end
   end
 end

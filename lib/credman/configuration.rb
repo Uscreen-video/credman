@@ -36,7 +36,7 @@ module Credman
       end
     end
 
-    add_setting :default_diff_branch, "main"
+    add_setting :default_diff_branch, "origin/main"
     add_setting :available_environments, %w[development test production]
   end
 end
