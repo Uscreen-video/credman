@@ -1,3 +1,9 @@
+## [0.0.6] - 2022-09-19
+
+- Cover all commands by specs (PR #11)
+- Small refactoring with extracting common methods into Credman::Base class (PR #11)
+- default `default_diff_branch` changed to `origin/main` (PR #11)
+
 ## [0.0.5] - 2022-09-06
 
 - Introduce config with `default_diff_branch` and `available_environments` options (PR #9)
