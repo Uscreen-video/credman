@@ -1,6 +1,20 @@
 module Credman
   module CLI
     module Commands
+      class Init < Dry::CLI::Command
+        desc "Create initial config for credman"
+
+        option :force_rewrite,
+          aliases: ["f"],
+          type: :boolean,
+          default: false,
+          desc: "rewrite existing config"
+
+        def call(force_rewrite:, **)
+          Credman::Init.new.perform(force_rewrite)
+        end
+      end
+
       class Get < Dry::CLI::Command
         desc "Find keys in credentials files for each environment"
 
