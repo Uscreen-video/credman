@@ -1,3 +1,5 @@
+require "tty-command"
+
 module Credman
   class Init
     attr_reader :config_path
@@ -12,6 +14,7 @@ module Credman
       end
 
       save_config(available_environments: available_environments, default_diff_branch: default_diff_branch)
+      puts "[CREATED] config/credman.yml"
     end
 
     private
@@ -33,7 +36,9 @@ module Credman
     end
 
     def default_diff_branch
-      base_branch = `git remote show origin | sed -n '/HEAD branch/s/.*: //p'`.strip
+      cmd = TTY::Command.new(pty: true, printer: :null)
+      base_branch = cmd.run!("git remote show origin | sed -n '/HEAD branch/s/.*: //p'").out.strip
+      base_branch = "main" if base_branch.blank?
       "origin/#{base_branch}"
     end
 
