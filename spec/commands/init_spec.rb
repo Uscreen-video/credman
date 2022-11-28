@@ -39,7 +39,7 @@ RSpec.describe Credman::Init do
         expect(File).not_to receive(:write)
 
         msg = "[SKIPPED] config/credman.yml already exist. You can run with `--force-rewrite` option to rewrite it\n"
-        expect { perform }.to output(msg).to_stderr
+        expect { perform }.to raise_error(SystemExit).and output(msg).to_stderr
       end
 
       context "with --force-rewrite flag" do
