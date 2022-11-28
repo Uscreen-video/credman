@@ -1,3 +1,7 @@
+## [0.0.7] - 2022-11-28
+
+-  Introduce `init` command (PR #12)
+
 ## [0.0.6] - 2022-09-19
 
 - Cover all commands by specs (PR #11)
