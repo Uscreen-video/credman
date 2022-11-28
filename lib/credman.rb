@@ -5,6 +5,7 @@ require "dry/cli"
 require "pastel"
 require "hash_diff"
 
+require_relative "credman/init"
 require_relative "credman/configuration"
 module Credman
   def self.configuration
@@ -29,6 +30,7 @@ module Credman
     module Commands
       extend Dry::CLI::Registry
 
+      register "init", Init
       register "get", Get
       register "list", List
       register "set", Set
