@@ -24,7 +24,7 @@ module Credman
     end
 
     def save_config(**options)
-      File.write(config_path, config_file_content(options))
+      File.write(config_path, config_file_content(**options))
     end
 
     def config_file_content(available_environments:, default_diff_branch:)
