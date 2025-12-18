@@ -43,7 +43,13 @@ module Credman
     end
 
     def key_for(environment)
-      ENV["RAILS_MASTER_KEY"] || Pathname.new("config/credentials/#{environment}.key").binread.strip
+      if op_available?
+        key = load_key_from_onepassword(environment)
+        return key if key
+      end
+
+      # Fallback to original behavior: read from file
+      Pathname.new("config/credentials/#{environment}.key").binread.strip
     end
 
     def decript(key, content)
@@ -52,6 +58,32 @@ module Credman
     end
 
     private
+
+    def op_available?
+      @op_available ||= system('which op > /dev/null 2>&1')
+    end
+
+    def map_env_to_vault(env)
+      env.to_s.capitalize
+    end
+
+    def load_key_from_onepassword(environment)
+      vault = map_env_to_vault(environment)
+      secret_ref = "op://#{vault}/RAILS_MASTER_KEY/password"
+
+      # Use op read to get the secret
+      result = `op read "#{secret_ref}" 2>&1`.strip
+
+      # Check if command was successful
+      if $?.success? && !result.empty? && !result.include?('error')
+        result
+      else
+        nil
+      end
+    rescue StandardError => e
+      # Silently fail and fall back to file-based key
+      nil
+    end
 
     def config_for(environment)
       encrypted_configuration(environment).config
