@@ -48,7 +48,10 @@ module Credman
         return key if key
       end
 
-      # Fallback to original behavior: read from file
+      unless op_available?
+        return ENV["RAILS_MASTER_KEY"] if ENV["RAILS_MASTER_KEY"]
+      end
+
       Pathname.new("config/credentials/#{environment}.key").binread.strip
     end
 
@@ -60,7 +63,8 @@ module Credman
     private
 
     def op_available?
-      @op_available ||= system('which op > /dev/null 2>&1')
+      return @op_available if defined?(@op_available)
+      @op_available = system('which op > /dev/null 2>&1')
     end
 
     def map_env_to_vault(env)
@@ -73,9 +77,10 @@ module Credman
 
       # Use op read to get the secret
       result = `op read "#{secret_ref}" 2>&1`.strip
+      exit_code = $?.exitstatus
 
       # Check if command was successful
-      if $?.success? && !result.empty? && !result.include?('error')
+      if exit_code == 0 && !result.empty? && !result.include?('error') && !result.include?('not signed in')
         result
       else
         nil
@@ -90,6 +95,41 @@ module Credman
     end
 
     def encrypted_configuration(environment)
+      master_key = key_for(environment)
+
+      key_from_file = false
+
+      unless master_key && !master_key.empty?
+        return ActiveSupport::EncryptedConfiguration.new(
+          config_path: "config/credentials/#{environment}.yml.enc",
+          key_path: "config/credentials/#{environment}.key",
+          env_key: "RAILS_MASTER_KEY",
+          raise_if_missing_key: true
+        )
+      end
+
+      key_file = Pathname.new("config/credentials/#{environment}.key")
+      if key_file.exist?
+        begin
+          file_key = key_file.binread.strip
+          key_from_file = (file_key == master_key)
+        rescue
+          key_from_file = false
+        end
+      end
+
+      if key_from_file
+        return ActiveSupport::EncryptedConfiguration.new(
+          config_path: "config/credentials/#{environment}.yml.enc",
+          key_path: "config/credentials/#{environment}.key",
+          env_key: "RAILS_MASTER_KEY",
+          raise_if_missing_key: true
+        )
+      end
+
+      original_rails_master_key = ENV["RAILS_MASTER_KEY"]
+      ENV["RAILS_MASTER_KEY"] = master_key
+
       ActiveSupport::EncryptedConfiguration.new(
         config_path: "config/credentials/#{environment}.yml.enc",
         key_path: "config/credentials/#{environment}.key",
